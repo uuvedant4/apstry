@@ -7,7 +7,7 @@ import Moon from "../../assets/Moon.svg";
 import LightButton from "../../assets/LightButton.svg";
 
 const SideBar = () => {
-  const [scrollY, setScrollY] = useState(0);
+  const [, setScrollY] = useState(0);
   const innerDivRef = useRef(null);
   const { isDarkMode, setIsDarkMode } = useTheme();
 
