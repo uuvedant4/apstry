@@ -11,6 +11,14 @@ const SideBar = () => {
   const innerDivRef = useRef(null);
   const { isDarkMode, setIsDarkMode } = useTheme();
 
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.style.backgroundColor = "black";
+    } else {
+      document.body.style.backgroundColor = "white";
+    }
+  }, [isDarkMode]);
+
   const toggleMode = (mode) => {
     setIsDarkMode(mode);
   };
