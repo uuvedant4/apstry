@@ -7,7 +7,7 @@ import Moon from "../../assets/Moon.svg";
 import LightButton from "../../assets/LightButton.svg";
 
 const SideBar = () => {
-  const [, setScrollY] = useState(0);
+  const [, setScrollY] = useState(25);
   const innerDivRef = useRef(null);
   const { isDarkMode, setIsDarkMode } = useTheme();
 
@@ -29,7 +29,8 @@ const SideBar = () => {
     const innerDiv = innerDivRef.current;
     if (innerDiv) {
       innerDiv.style.opacity = "1";
-      innerDiv.style.transform = `translateY(${newScrollY}px)`;
+      document.getElementById("liner").style.height =
+        (newScrollY / 1.3 < 25 ? 25 : newScrollY / 1.3) + "px";
     }
   };
 
@@ -42,7 +43,7 @@ const SideBar = () => {
 
   return (
     <>
-      {window.innerWidth >= 480 ? (
+      {window.innerWidth > 480 ? (
         <div className="sidebar">
           <div
             style={{
@@ -52,20 +53,23 @@ const SideBar = () => {
           >
             <div
               style={{
-                backgroundColor: isDarkMode && "#161519",
                 color: isDarkMode && "#FFFFFF",
               }}
               onClick={() => toggleMode(false)}
-              className={!isDarkMode ? "active" : "inactive"}
             >
               <span>Light</span>
+            </div>
+            <div
+              style={{ color: isDarkMode && "black" }}
+              className={`active-mode-button ${isDarkMode && "dark-active"}`}
+            >
+              <span>{isDarkMode ? "Dark" : "Light"}</span>
             </div>
             <div
               style={{
                 color: isDarkMode && "#17161B",
               }}
               onClick={() => toggleMode(true)}
-              className={isDarkMode ? "active" : "inactive"}
             >
               <span>Dark</span>
             </div>
@@ -81,6 +85,7 @@ const SideBar = () => {
               className="line"
             >
               <div
+                id="liner"
                 style={{
                   borderColor: isDarkMode && "#A2A0FF",
                 }}
