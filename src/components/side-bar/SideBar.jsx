@@ -10,6 +10,7 @@ const SideBar = () => {
   const [, setScrollY] = useState(25);
   const innerDivRef = useRef(null);
   const { isDarkMode, setIsDarkMode } = useTheme();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     if (isDarkMode) {
@@ -22,6 +23,16 @@ const SideBar = () => {
   const toggleMode = (mode) => {
     setIsDarkMode(mode);
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const handleScroll = () => {
     const newScrollY = window.scrollY / 2;
@@ -43,7 +54,7 @@ const SideBar = () => {
 
   return (
     <>
-      {window.innerWidth > 480 ? (
+      {windowWidth > 480 ? (
         <div className="sidebar">
           <div
             style={{
